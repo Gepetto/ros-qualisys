@@ -69,7 +69,6 @@ target_link_libraries(
 if(SUFFIX_SO_VERSION)
   set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION})
 endif()
-# set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 # Main Executable
 add_executable(${PROJECT_NAME}-node src/ros-qualisys.cpp)
@@ -78,8 +77,6 @@ set_target_properties(${PROJECT_NAME}-node PROPERTIES OUTPUT_NAME
                                                       "${PROJECT_NAME}")
 set_target_properties(${PROJECT_NAME}-node PROPERTIES INSTALL_RPATH
                                                       "\$ORIGIN/../lib")
-# set_property(TARGET ${PROJECT_NAME}-node PROPERTY POSITION_INDEPENDENT_CODE
-# ON)
 
 # Unit tests
 add_subdirectory(tests)
