@@ -43,7 +43,6 @@ project(${PROJECT_NAME} ${PROJECT_ARGS})
 
 # Project dependencies
 find_package(qualisys_cpp_sdk REQUIRED)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 find_package(roscpp REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)

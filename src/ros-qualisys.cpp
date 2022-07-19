@@ -7,7 +7,7 @@
 #include "ros-qualisys/qualisys-to-ros.hpp"
 
 int main(int argc, char* argv[]) {
-  ros::init(argc, argv, "my_node_name", ros::init_options::NoSigintHandler);
+  ros::init(argc, argv, "ros_qualisys", ros::init_options::NoSigintHandler);
   ros::NodeHandle nh;
 
   ros_qualisys::QualisysToRos q2r;
