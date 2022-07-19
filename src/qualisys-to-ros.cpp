@@ -24,7 +24,7 @@ bool QualisysToRos::initialize() {
   int tmp_base_port(0);
   int tmp_udp_port(0);
   node_handle_->param("server_address", server_address_,
-                      std::string("192.168.0.1"));
+                      std::string("127.0.0.1"));
   node_handle_->param("server_base_port", tmp_base_port, 22222);
   node_handle_->param("server_udp_port", tmp_udp_port, 6734);
   node_handle_->param("major_version", major_version_, 1);
@@ -126,6 +126,7 @@ void QualisysToRos::run() {
                   rotation_matrix_[8]);
               ros_rotation_matrix_.getRotation(ros_quaternion_);
               ros_quaternion_.normalize();
+              // There a change of convention between ROS and Qualisys
               ros_quaternion_[3] = -ros_quaternion_[3];
               ros_quaternion_.normalize();
               ros_transform_.transform.translation.x = px_ / 1000.0;
