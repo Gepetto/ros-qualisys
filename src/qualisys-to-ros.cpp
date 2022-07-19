@@ -120,28 +120,40 @@ void QualisysToRos::run() {
           for (unsigned int i = 0; i < body_count_; i++) {
             if (rt_packet_->Get6DOFBody(i, px_, py_, pz_,
                                         rotation_matrix_.data())) {
-              body_name_ = crt_protocol_.Get6DOFBodyName(i);
-              ros_rotation_matrix_.setValue(
-                  rotation_matrix_[0], rotation_matrix_[1], rotation_matrix_[2],
-                  rotation_matrix_[3], rotation_matrix_[4], rotation_matrix_[5],
-                  rotation_matrix_[6], rotation_matrix_[7],
-                  rotation_matrix_[8]);
-              ros_rotation_matrix_.getRotation(ros_quaternion_);
-              ros_quaternion_.normalize();
-              // There a change of convention between ROS and Qualisys
-              ros_quaternion_[3] = -ros_quaternion_[3];
-              ros_quaternion_.normalize();
-              ros_transform_.transform.translation.x = px_ / 1000.0;
-              ros_transform_.transform.translation.y = py_ / 1000.0;
-              ros_transform_.transform.translation.z = pz_ / 1000.0;
-              ros_transform_.transform.rotation.x = ros_quaternion_.x();
-              ros_transform_.transform.rotation.y = ros_quaternion_.y();
-              ros_transform_.transform.rotation.z = ros_quaternion_.z();
-              ros_transform_.transform.rotation.w = ros_quaternion_.w();
-              ros_transform_.header.frame_id = fixed_frame_id_;
-              ros_transform_.header.stamp = ros::Time::now();
-              ros_transform_.child_frame_id = body_name_;
-              publisher_.sendTransform(ros_transform_);
+              if (std::isfinite(px_) && std::isfinite(px_) &&
+                  std::isfinite(px_) && std::isfinite(rotation_matrix_[0]) &&
+                  std::isfinite(rotation_matrix_[1]) &&
+                  std::isfinite(rotation_matrix_[2]) &&
+                  std::isfinite(rotation_matrix_[3]) &&
+                  std::isfinite(rotation_matrix_[4]) &&
+                  std::isfinite(rotation_matrix_[5]) &&
+                  std::isfinite(rotation_matrix_[6]) &&
+                  std::isfinite(rotation_matrix_[7]) &&
+                  std::isfinite(rotation_matrix_[8])) {
+                body_name_ = crt_protocol_.Get6DOFBodyName(i);
+                ros_rotation_matrix_.setValue(
+                    rotation_matrix_[0], rotation_matrix_[1],
+                    rotation_matrix_[2], rotation_matrix_[3],
+                    rotation_matrix_[4], rotation_matrix_[5],
+                    rotation_matrix_[6], rotation_matrix_[7],
+                    rotation_matrix_[8]);
+                ros_rotation_matrix_.getRotation(ros_quaternion_);
+                ros_quaternion_.normalize();
+                // There a change of convention between ROS and Qualisys
+                ros_quaternion_[3] = -ros_quaternion_[3];
+                ros_quaternion_.normalize();
+                ros_transform_.transform.translation.x = px_ / 1000.0;
+                ros_transform_.transform.translation.y = py_ / 1000.0;
+                ros_transform_.transform.translation.z = pz_ / 1000.0;
+                ros_transform_.transform.rotation.x = ros_quaternion_.x();
+                ros_transform_.transform.rotation.y = ros_quaternion_.y();
+                ros_transform_.transform.rotation.z = ros_quaternion_.z();
+                ros_transform_.transform.rotation.w = ros_quaternion_.w();
+                ros_transform_.header.frame_id = fixed_frame_id_;
+                ros_transform_.header.stamp = ros::Time::now();
+                ros_transform_.child_frame_id = body_name_;
+                publisher_.sendTransform(ros_transform_);
+              }
             }
           }
         }
