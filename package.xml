@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>ros-qualisys</name>
-  <version>0.0.1</version>
+  <version>1.0.0</version>
   <description>ROS wrapper around the https://github.com/qualisys/qualisys_cpp_sdk package. See README.md. </description>
   <maintainer email="guilhem.saurel@laas.fr">Guilhem Saurel</maintainer>
   <author email="maximilien.naveau@laas.fr">Maximilien Naveau</author>
