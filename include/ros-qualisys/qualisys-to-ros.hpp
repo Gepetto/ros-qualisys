@@ -46,7 +46,6 @@ class QualisysToRos {
   int minor_version_;
   int major_version_;
   bool big_endian_;
-  std::vector<std::string> model_list_;
   int frame_rate_;
   double max_accel_;
   bool publish_tf_;

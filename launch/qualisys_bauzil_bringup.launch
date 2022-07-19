@@ -1,0 +1,7 @@
+<launch>
+  <rosparam command="load" file="$(find ros-qualisys)/config/bauzil-qualisys.yaml" />
+
+  <node name="ros_qualisys" pkg="ros-qualisys" type="ros-qualisys" output="screen">
+  </node>
+
+</launch>

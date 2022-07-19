@@ -29,7 +29,6 @@ bool QualisysToRos::initialize() {
   node_handle_->param("server_udp_port", tmp_udp_port, 6734);
   node_handle_->param("major_version", major_version_, 1);
   node_handle_->param("minor_version", minor_version_, 20);
-  node_handle_->param("model_list", model_list_, std::vector<std::string>(0));
   node_handle_->param("frame_rate", frame_rate_, 100);
   node_handle_->param("fixed_frame_id", fixed_frame_id_, std::string("mocap"));
   base_port_ = static_cast<unsigned short>(tmp_base_port);
@@ -53,7 +52,9 @@ bool QualisysToRos::connect() {
 
   // connect properly
   int failure = 0;
-  while (failure < 20 && ros::ok()) {
+  bool success = false;
+  while (failure < 20 && ros::ok() && !success) {
+    ROS_INFO_STREAM("QualisysToRos::connect(): Try to connect");
     if (!crt_protocol_.Connected()) {
       if (!crt_protocol_.Connect(server_address_.c_str(), base_port_,
                                  &udp_port_, major_version_, minor_version_,
@@ -66,7 +67,7 @@ bool QualisysToRos::connect() {
         continue;
       }
     }
-
+    ROS_INFO_STREAM("QualisysToRos::connect(): Are data available?");
     if (!data_available_) {
       if (!crt_protocol_.Read6DOFSettings(data_available_)) {
         ROS_INFO_STREAM("crt_protocol_.Read6DOFSettings: "
@@ -76,7 +77,7 @@ bool QualisysToRos::connect() {
         continue;
       }
     }
-
+    ROS_INFO_STREAM("QualisysToRos::connect(): Are data streamed");
     if (!crt_protocol_.StreamFrames(CRTProtocol::RateAllFrames, 0, 0, NULL,
                                     CRTProtocol::cComponent6d)) {
       ROS_INFO_STREAM(
@@ -85,8 +86,10 @@ bool QualisysToRos::connect() {
       sleep(1);
       continue;
     }
+    success = true;
   }
-  return failure >= 20;
+  ROS_INFO_STREAM("QualisysToRos::connect(): Connected successfully");
+  return failure >= 20 && success;
 }
 
 void QualisysToRos::run() {
@@ -95,8 +98,7 @@ void QualisysToRos::run() {
 
   rt_packet_ = crt_protocol_.GetRTPacket();
   body_count_ = rt_packet_->Get6DOFBodyCount();
-
-  ROS_INFO_STREAM("Number of bodies found :" << body_count_);
+  ROS_INFO_THROTTLE(1, "Number of bodies found :%d", body_count_);
 
   if (crt_protocol_.Receive(packet_type_, true) ==
       CNetwork::ResponseType::success) {
@@ -136,7 +138,7 @@ void QualisysToRos::run() {
               ros_transform_.transform.rotation.y = ros_quaternion_.y();
               ros_transform_.transform.rotation.z = ros_quaternion_.z();
               ros_transform_.transform.rotation.w = ros_quaternion_.w();
-              ros_transform_.header.frame_id = "Qualisys";
+              ros_transform_.header.frame_id = fixed_frame_id_;
               ros_transform_.header.stamp = ros::Time::now();
               ros_transform_.child_frame_id = body_name_;
               publisher_.sendTransform(ros_transform_);
