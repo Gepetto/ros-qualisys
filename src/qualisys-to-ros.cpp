@@ -1,7 +1,3 @@
-/**
- *
- */
-
 #include "ros-qualisys/qualisys-to-ros.hpp"
 
 #include <cmath>

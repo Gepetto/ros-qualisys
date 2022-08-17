@@ -41,6 +41,10 @@ include("${JRL_CMAKE_MODULES}/boost.cmake")
 compute_project_args(PROJECT_ARGS LANGUAGES CXX)
 project(${PROJECT_NAME} ${PROJECT_ARGS})
 
+# Define the README file as the main page.
+set(DOXYGEN_INPUT "${DOXYGEN_INPUT} \"${PROJECT_SOURCE_DIR}/README.md\" \"${PROJECT_SOURCE_DIR}/package.xml\"" CACHE STRING " ")
+set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "\"${PROJECT_SOURCE_DIR}/README.md\"" CACHE STRING " ")
+
 # Project dependencies
 find_package(qualisys_cpp_sdk REQUIRED)
 find_package(roscpp REQUIRED)
