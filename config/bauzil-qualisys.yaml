@@ -1,8 +1,14 @@
 ros_qualisys:
+  # IP address where the Qualisys system is streaming the data.
   server_address: "140.93.16.160"
+  # Server port where the Qualisys system is streaming the data.
   server_base_port: 22222
+  # Server UDP port where the Qualisys system is streaming the data.
   server_udp_port: 6734
+  # Version of the server software.
   major_version: 1
   minor_version: 20
+  # Target framerate of the ROS node, this is a maximum rate.
   frame_rate: 1000
+  # Name of the static frame broadcasted in TF2.
   fixed_frame_id: "mocap"
