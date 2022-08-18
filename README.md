@@ -32,7 +32,7 @@ You can download this package via github:
 
 And then build the package via CMake and Make:
 
-    source /opt/openrobots/setup.bash
+    export CMAKE_PREFIX_PATH=/opt/openrobots
     source /opt/ros/XXXX/setup.bash
     cd ros-qualisys
     mkdir _build
