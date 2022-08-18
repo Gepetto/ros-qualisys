@@ -20,7 +20,7 @@ namespace ros_qualisys {
  * to a Qualisys system and export the streamed objects to /tf and /tf_static.
  *
  * We use rosparams in order to parametrize this nodes behavior.
- * In order to fin out the values of these parameters please refer to your
+ * In order to find out the values of these parameters please refer to your
  * Qualisys system documentation.
  *
  * A quick example of YAML file for the parametrization.
