@@ -19,7 +19,7 @@ For executing the package:
 - ament_cmake + rclcpp (if with ROS2)
 - Python 2 or 3 (Standard Ubuntu 18.04 or higher)
 - boost (Standard Ubuntu 18.04 or higher)
-- qualisys_cpp_sdk (installable via the robotpkg ppa)
+- qualisys_cpp_sdk (installable via [robotpkg](http://robotpkg.openrobots.org/))
 - tf2 (ROS 1 or 2)
 - tf2_ros (ROS 1 or 2)
 - geometry_msgs (ROS 1 or 2)
