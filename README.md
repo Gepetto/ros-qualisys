@@ -1,7 +1,7 @@
 ros_qualisys
 ============
 
-This is ROS wrapper around the https://github.com/qualisys/qualisys_cpp_sdk package.
+This is a ROS wrapper around the https://github.com/qualisys/qualisys_cpp_sdk package.
 
 ## Getting started
 
