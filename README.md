@@ -32,7 +32,7 @@ You can download this package via github:
     cd workspace/src
     git clone --recursive git@github.com:Gepetto/ros-qualisys.git
 
-And then build the package via CMake and Make:
+And then build this package via colcon or catkin:
 
     export CMAKE_PREFIX_PATH=/opt/openrobots
     source /opt/ros/XXXX/setup.bash
@@ -56,6 +56,7 @@ different workspace:
 
     source /opt/ros/XXXX/setup.bash
     export LD_LIBRARY_PATH /opt/openrobots/lib:$LD_LIBRARY_PATH
+    source workspace/install/setup.bash
     roslaunch ros-qualisys qualisys_bauzil_bringup.launch
 
 The parameter of the node are loaded from the `config/bauzil-qualisys.yaml` file.
