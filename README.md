@@ -60,7 +60,7 @@ different workspace:
     roslaunch ros-qualisys qualisys_bauzil_bringup.launch
 
 The parameter of the node are loaded from the `config/bauzil-qualisys.yaml` file.
-The yaml is documented so please check the file [directly here](https://github.com/Gepetto/ros-qualisys/blob/main/config/bauzil-qualisys.yaml)
+The yaml is documented so please check the file [directly here](config/bauzil-qualisys.yaml)
 
 ## Online documentation
 
