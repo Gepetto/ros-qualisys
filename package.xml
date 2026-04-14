@@ -5,7 +5,7 @@
   <description>ROS wrapper around the https://github.com/qualisys/qualisys_cpp_sdk package. See README.md. </description>
   <maintainer email="guilhem.saurel@laas.fr">Guilhem Saurel</maintainer>
   <author email="maximilien.naveau@laas.fr">Maximilien Naveau</author>
-  <license>BSD</license>
+  <license>BSD-2-Clause</license>
 
   <url type="website">https://github.com/gepetto/ros-qualisys</url>
 
